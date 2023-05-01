@@ -1,8 +1,8 @@
 spring:
   datasource:
-    #    url: jdbc:h2:mem:testh2 # \uC774\uAC8C \uC778\uBA54\uBAA8\uB9AC \uBC29\uC2DD\uC774\uB77C \uC11C\uBC84 \uC7AC\uC2E4\uD589\uD558\uBA74 \uB370\uC774\uD130 \uC0AC\uB77C\uC9C4\uB2E4.
+    #    url: jdbc:h2:mem:testh2 # 이게 인메모리 방식이라 서버 재실행하면 데이터 사라진다.
     #    url: jdbc:postgresql://localhost:5432/testdb1  # postgresql
-    url: jdbc:postgresql://localhost:6432/jwtRedis # agensgraph2(\uB3C4\uCEE4 \uCEE8\uD14C\uC774\uB108 \uC774\uB984)
+    url: jdbc:postgresql://localhost:6432/jwtRedis # agensgraph2(도커 컨테이너 이름)
     username: test1
     password: 1234
     driver-class-name: org.postgresql.Driver
@@ -10,15 +10,15 @@ spring:
       maximum-pool-size: 4
 #  h2:
 #    console:
-#      enabled: true # \uC774\uAC78 \uD574\uC57C\uC9C0\uB9CC h2-console \uB85C\uADF8\uB97C h2 \uC548\uD0A4\uACE0 \uC811\uC18D\uD560 \uC218 \uC788\uB2E4.
+#      enabled: true # 이걸 해야지만 h2-console 로그를 h2 안키고 접속할 수 있다.
   jpa:
     hibernate.dialect: org.hibernate.dialect.PostgreSQLdialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: create # SessionFactory 시작시 스키마를 삭제하고 다시 생성
     properties:
       hibernate:
-        # show_sql: true # jpa\uAC00 \uC2E4\uD589\uD558\uB294 \uCFFC\uB9AC\uB97C \uCF58\uC194\uC5D0 \uCC0D\uB294\uB2E4.
-        format_sql: true  # \uCFFC\uB9AC\uAC00 format\uB3FC\uC11C \uC608\uC058\uAC8C \uB098\uC628\uB2E4.
+        # show_sql: true # jpa가 실행하는 쿼리를 콘솔에 찍는다.
+        format_sql: true  # 쿼리가 format돼서 예쁘게 나온다.
     database: postgresql
   redis:
     lettuce:
@@ -34,7 +34,7 @@ jwt:
   header: Authorization
   secret-key: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
   token:
-    expired-time-ms: 50 # token\uB9CC\uB8CC\uC2DC\uAC04\uC744 86400(24\uC2DC\uAC04)\uCD08\uB85C \uC124\uC815
+    expired-time-ms: 86400 # token만료시간을 86400초(24시간)로 설정한다
 
 logging.level:
   org.hibernate.SQL: debug
