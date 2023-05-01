@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    #    url: jdbc:h2:mem:testh2 # \uC774\uAC8C \uC778\uBA54\uBAA8\uB9AC \uBC29\uC2DD\uC774\uB77C \uC11C\uBC84 \uC7AC\uC2E4\uD589\uD558\uBA74 \uB370\uC774\uD130 \uC0AC\uB77C\uC9C4\uB2E4.
+    #    url: jdbc:postgresql://localhost:5432/testdb1  # postgresql
+    url: jdbc:postgresql://localhost:6432/jwtRedis # agensgraph2(\uB3C4\uCEE4 \uCEE8\uD14C\uC774\uB108 \uC774\uB984)
+    username: test1
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 4
+#  h2:
+#    console:
+#      enabled: true # \uC774\uAC78 \uD574\uC57C\uC9C0\uB9CC h2-console \uB85C\uADF8\uB97C h2 \uC548\uD0A4\uACE0 \uC811\uC18D\uD560 \uC218 \uC788\uB2E4.
+  jpa:
+    hibernate.dialect: org.hibernate.dialect.PostgreSQLdialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        # show_sql: true # jpa\uAC00 \uC2E4\uD589\uD558\uB294 \uCFFC\uB9AC\uB97C \uCF58\uC194\uC5D0 \uCC0D\uB294\uB2E4.
+        format_sql: true  # \uCFFC\uB9AC\uAC00 format\uB3FC\uC11C \uC608\uC058\uAC8C \uB098\uC628\uB2E4.
+    database: postgresql
+  redis:
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 2
+    port: 6379
+    host: localhost
+    password: '1234'
+
+jwt:
+  header: Authorization
+  secret-key: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  token:
+    expired-time-ms: 50 # token\uB9CC\uB8CC\uC2DC\uAC04\uC744 86400(24\uC2DC\uAC04)\uCD08\uB85C \uC124\uC815
+
+logging.level:
+  org.hibernate.SQL: debug
